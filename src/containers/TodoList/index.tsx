@@ -4,6 +4,7 @@ import { AplicationStore } from 'store/reducers';
 import {
   actionTodosRequestLoad,
   actionTodosSetNewTask,
+  actionTodosRemoveTask,
 } from 'store/actions/todosActions';
 import { IndexProps } from './model';
 
@@ -13,6 +14,7 @@ const TodoList: React.FC<IndexProps> = ({
   taskList,
   requestLoad,
   addNewTask,
+  removeTask,
 }) => {
   const [task, setTask] = React.useState<string>('');
 
@@ -24,6 +26,12 @@ const TodoList: React.FC<IndexProps> = ({
     setTask(e.target.value);
   }
 
+  function handleButtonAdd() {
+    if (task && task.length >= 3) {
+      addNewTask(task);
+    }
+  }
+
   return (
     <div>
       <input
@@ -32,10 +40,10 @@ const TodoList: React.FC<IndexProps> = ({
         value={task}
         onChange={handleInputTaskName}
       />
-      <button type="button" onClick={() => addNewTask(task)}>
+      <button type="button" onClick={handleButtonAdd}>
         Add
       </button>
-      <List list={taskList} />
+      <List list={taskList} handleItem={removeTask} />
     </div>
   );
 };
@@ -46,6 +54,7 @@ const mapStateToProps = (store: AplicationStore) => ({
 });
 
 export default connect(mapStateToProps, {
+  removeTask: actionTodosRemoveTask,
   addNewTask: actionTodosSetNewTask,
   requestLoad: actionTodosRequestLoad,
 })(TodoList);

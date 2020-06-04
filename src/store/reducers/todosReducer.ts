@@ -1,20 +1,21 @@
 import { Reducer } from 'redux';
 import _ from 'lodash';
-import * as Types from 'store/types/todosTypes';
+import { Types } from 'typesafe-actions';
+import { TodosTypes, TodosState, Task } from 'store/types/todosTypes';
 
-const INICIAL_STATE: Types.TodosState = {
+const INICIAL_STATE: TodosState = {
   list: [],
   loading: false,
 };
 
 const dispatch = {
-  [Types.TodosTypes.REQUEST_LOAD]: ({ state }) => ({ ...state, loading: true }),
-  [Types.TodosTypes.REQUEST_SUCCESS]: ({ action }) => ({
+  [TodosTypes.REQUEST_LOAD]: ({ state }) => ({ ...state, loading: true }),
+  [TodosTypes.REQUEST_SUCCESS]: ({ action }) => ({
     list: [action.payload.data],
     loading: false,
   }),
-  [Types.TodosTypes.REQUEST_FAILURE]: () => ({ list: [], loading: false }),
-  [Types.TodosTypes.SET_NEW_TASK]: ({ state, action }) => ({
+  [TodosTypes.REQUEST_FAILURE]: () => ({ list: [], loading: false }),
+  [TodosTypes.SET_NEW_TASK]: ({ state, action }) => ({
     ...state,
     list: [
       ...state.list,
@@ -26,9 +27,15 @@ const dispatch = {
       },
     ],
   }),
+  [TodosTypes.REMOVE_TASK]: ({ state, action }) => ({
+    ...state,
+    list: [
+      ...state.list.filter((task: Task) => task.id !== action?.payload?.data),
+    ],
+  }),
 };
 
-const Todos: Reducer<Types.TodosState> = (state = INICIAL_STATE, action) =>
+const Todos: Reducer<TodosState> = (state = INICIAL_STATE, action) =>
   dispatch[action?.type]
     ? dispatch[action?.type]({ state, action })
     : INICIAL_STATE;

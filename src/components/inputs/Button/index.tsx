@@ -5,16 +5,14 @@ import MuiButton from '@material-ui/core/Button';
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
 import palette from 'constants/palette';
-import { ButtonProps } from './model';
-
-interface StyleProps {
-  color: string | undefined;
-}
+import { ButtonProps, StyleProps } from './model';
 
 const styles = makeStyles({
   button: (props: StyleProps) => ({
     color: palette[`${props.color}Contrast`] || '#FFF',
     margin: '5px',
+    minWidth: 150,
+    height: 36,
     backgroundColor: palette[props.color] || palette.primary,
   }),
 });

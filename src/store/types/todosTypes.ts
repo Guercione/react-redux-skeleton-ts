@@ -3,6 +3,7 @@ export enum TodosTypes {
   REQUEST_SUCCESS = '@todo/REQUEST_SUCCESS',
   REQUEST_FAILURE = '@todo/REQUEST_FAILURE',
   SET_NEW_TASK = '@todo/SET_NEW_TASK',
+  REMOVE_TASK = '@todo/REMOVE_TASK',
 }
 
 export interface TodosState {

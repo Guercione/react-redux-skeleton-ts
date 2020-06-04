@@ -1,4 +1,4 @@
-interface ButtonParentProps {
+export interface ButtonProps {
   loading?: boolean;
   disabled?: boolean;
   children: React.ReactNode;
@@ -6,4 +6,6 @@ interface ButtonParentProps {
   onClick(): void;
 }
 
-export type ButtonProps = ButtonParentProps;
+export interface StyleProps {
+  color: string | undefined;
+}

@@ -6,6 +6,7 @@ interface Request {
   urlParam?: string;
   data?: any;
 }
+
 const request = (params: Request) => {
   try {
     const response = axios({
