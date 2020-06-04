@@ -18,7 +18,7 @@
 
 - npm install / yarn
 - npm run start / yarn start
-- Access: http://localhost:3003
+- Access: http://localhost:3000
 - Edit `REACT_APP_API_URL` on `.env` with the API URI if needed
 
 ## How to build
@@ -27,6 +27,10 @@
 - Copy all content from the "public" folder to the server
 
 ## Backlog
+
+### Version 1.0.1
+
+- Todo task Demo
 
 ### Version 1.0.0
 
