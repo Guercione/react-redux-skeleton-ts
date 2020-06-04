@@ -1,15 +1,14 @@
 import React from 'react';
 
-interface Props {
-  children: Node;
-}
+import ErrorTemplate from './ErrorTemplate';
 
-interface State {
-  hasError: boolean;
-}
+import { ErrorBoundaryParentProps, ErrorBoundaryState } from './model';
 
-class ErrorBoundary extends React.Component<Props, State> {
-  constructor(props: Props) {
+class ErrorBoundary extends React.Component<
+  ErrorBoundaryParentProps,
+  ErrorBoundaryState
+> {
+  constructor(props: ErrorBoundaryParentProps) {
     super(props);
     this.state = { hasError: false };
   }
@@ -18,7 +17,7 @@ class ErrorBoundary extends React.Component<Props, State> {
     return { hasError: true };
   }
 
-  componentDidCatch(error: any, errorInfo: any): void {
+  componentDidCatch(error: any, errorInfo: any) {
     console.error('Error Boundary - ', error, errorInfo);
   }
 
@@ -27,7 +26,13 @@ class ErrorBoundary extends React.Component<Props, State> {
     const { children } = this.props;
 
     if (hasError) {
-      return <div>Something strange happened</div>;
+      return (
+        <ErrorTemplate
+          code={500}
+          title="Something went wrong"
+          subtitle="If the error persists, please get in contact with the Administration"
+        />
+      );
     }
 
     return children;

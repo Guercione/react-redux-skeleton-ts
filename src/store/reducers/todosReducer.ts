@@ -3,7 +3,7 @@ import _ from 'lodash';
 import * as Types from 'store/types/todosTypes';
 
 const INICIAL_STATE: Types.TodosState = {
-  list: [{ userId: 1, id: 0, title: 'teste', completed: false }],
+  list: [],
   loading: false,
 };
 
